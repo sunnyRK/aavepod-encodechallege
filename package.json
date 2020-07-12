@@ -1,0 +1,38 @@
+{
+  "name": "aavepod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.0.37",
+    "ethereumjs-util": "^6.2.0",
+    "ethereumjs-wallet": "^0.6.3",
+    "fs": "0.0.1-security",
+    "next": "^9.1.5",
+    "next-routes": "^1.4.2",
+    "openzeppelin-solidity": "^2.4.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.0",
+    "rimble-ui": "^0.7.1",
+    "semantic-ui-react": "^0.88.2",
+    "solc": "^0.5.12",
+    "styled-components": "^4.2.0",
+    "web3": "^1.2.4",
+    "web3-utils": "^1.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnyRK/aavepod-encodechallege.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunnyRK/aavepod-encodechallege/issues"
+  },
+  "homepage": "https://github.com/sunnyRK/aavepod-encodechallege#readme"
+}
