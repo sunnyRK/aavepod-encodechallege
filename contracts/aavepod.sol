@@ -5,12 +5,12 @@ import "./helper/SafeMath.sol";
 
 import "./interfaces/IERC20.sol";
 import "./interfaces/ERC20.sol";
-import "./interfaces/ILendingPoolAddressesProvider.sol";
-import "./interfaces/ILendingPool.sol";
-import "./interfaces/IAToken.sol";
-import "./interfaces/IPodStorageInterface.sol";
-import "./interfaces/AaveCoreInterface.sol";
-import "./interfaces/ATokenInterface.sol";
+import "./interfaces/aaveInterface/ILendingPoolAddressesProvider.sol";
+import "./interfaces/aaveInterface/ILendingPool.sol";
+import "./interfaces/aaveInterface/IAToken.sol";
+import "./interfaces/storageInterface/IPodStorageInterface.sol";
+import "./interfaces/aaveInterface/AaveCoreInterface.sol";
+import "./interfaces/aaveInterface/ATokenInterface.sol";
 
 import "./factory/PodFactory.sol";
 import "./storage/podStorage.sol";
