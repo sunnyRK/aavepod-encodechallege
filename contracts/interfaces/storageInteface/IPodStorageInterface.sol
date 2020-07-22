@@ -6,8 +6,9 @@ interface IPodStorageInterface {
         uint256 betId, 
         uint256 minimumContribution, 
         uint256 numOfStakers, 
-        string memory betName
+        string calldata betName
     ) external;
+    function setRunningPodBetId(uint256 betId) external;
     function addNewBetId(uint256 betId, address manager) external;
     function setStakingDone(uint256 betId) external;
     function setWinnerDeclare(uint256 betId) external;
@@ -21,7 +22,9 @@ interface IPodStorageInterface {
     function increaseStakerCount(uint256 betId) external;
     function decreaseStakerCount(uint256 betId) external;
     function setTimestamp(uint256 betId, uint256 timestamp) external;
+    function setBetTokens(uint256 betId, address _tokenAddress, address _aaveToken) external;
         
+    function getRunningPodBetId() external view returns(uint256);
     function getTimestamp(uint256 betId) external view returns(uint256);
     function getStakeCount(uint256 betId) external view returns(uint256);
     function getBetIdManager(uint256 betId) external view returns(address);
@@ -37,4 +40,5 @@ interface IPodStorageInterface {
     function getStakersArrayForBet(uint256 betId) external view returns(address[] memory);
     function getLengthOfStakersARray(uint256 betId) external view returns(uint256);
     function getRedeemFlagStakerOnBet(uint256 betId, address staker) external view returns(bool);
+    function getBetTokens(uint256 betId) external view returns(address, address);
 }
