@@ -1,0 +1,96 @@
+.landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  min-height: inherit;
+  flex: 1;
+  .pod {
+    height: calc(100% - 20px);
+    width: calc(100% * (3/4));
+    background-color: #2D325A;
+    padding: 40px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    .pod-name {
+      color: #E9EBF9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .join-pod {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .pod-progressbar {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .total-investor {
+          color: pink;
+          margin-left: 10px;
+        }
+        .progress {
+          flex-grow: 1;
+          .progress-bar {
+            height: 1.5rem;
+            background-color: #4E7CFF;
+          }
+        }
+      }
+      .join-button {
+        width: 150px;
+        display: flex;
+        justify-content: flex-end;
+        .join-pod-button {
+          border: #41CD7D 1px solid;
+          color: #41CD7D;
+          border-radius: 15px;
+          width: 100px;
+          margin-left: 10px;
+        }
+      }
+    }
+    .stats {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 3rem;
+      .stats-info {
+        .stats-header {
+          color: #A3AAE5;
+          // color: #737AAE;
+          font-weight: 600;      
+        }
+        .stats-value {
+          color: #E5E7F5;
+          margin-top: 5px;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+    .timer {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 120px;
+      color: #F44F62;
+      border: #F44F62 1px solid;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: auto;
+      .countdown {
+        .countdown-value {
+          font-size: 3.5rem;
+          font-weight: 600;
+        }
+        .countdown-footer {
+          font-weight: 500;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
