@@ -13,8 +13,10 @@
     border-radius: 30px;
     display: flex;
     flex-direction: column;
+    margin: 0 20px 0 40px;
     .pod-name {
-      color: #E9EBF9;
+      color: #7279AC;
+      font-weight: 600;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -40,34 +42,68 @@
           }
         }
       }
-      .join-button {
-        width: 150px;
+      .button-wrapper {
+        width: 235px;
         display: flex;
         justify-content: flex-end;
-        .join-pod-button {
-          border: #41CD7D 1px solid;
-          color: #41CD7D;
+        .button-content {
           border-radius: 15px;
           width: 100px;
           margin-left: 10px;
+        }
+        .join-pod-button {
+          border: #41CD7D 1px solid;
+          color: #41CD7D;
+        }
+        .redeem-button {
+          border: red 1px solid;
+          color: red;
         }
       }
     }
     .stats {
       display: flex;
+      flex-direction: column;
       justify-content: space-evenly;
-      margin-top: 3rem;
-      .stats-info {
-        .stats-header {
-          color: #A3AAE5;
-          // color: #737AAE;
-          font-weight: 600;      
+      margin-top: 1.5rem;
+      .stats-info-header {
+        display: flex;
+        justify-content: center;
+        .estimated-info {
+          .estimated-header {
+            display: flex;
+            justify-content: center;
+            color: #A3AAE5;
+            font-weight: 600;
+            font-size: 1.5rem; 
+          }
+          .estimated-value {
+            color: #E5E7F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .coin-icon {
+              height: 22px;
+              width: 22px;
+            }
+          }
         }
-        .stats-value {
-          color: #E5E7F5;
-          margin-top: 5px;
-          display: flex;
-          justify-content: center;
+      }
+      .stats-info-footer {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 2rem;
+        .stats-info {
+          .stats-header {
+            color: #A3AAE5;
+            font-weight: 600;      
+          }
+          .stats-value {
+            color: #E5E7F5;
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+          }
         }
       }
     }
@@ -91,6 +127,76 @@
           justify-content: center;
         }
       }
+    }
+  }
+  .right-content {
+    height: calc(100% - 20px);
+    width: calc(100% * (1/4));
+    background-color: #2D325A;
+    padding: 40px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 40px 0 20px;
+    .create-pod {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #848d9063;
+      .header {
+        color: #7279AC;
+        font-weight: 600;
+      }
+    }
+    .total-winning {
+      margin-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #848d9063;
+      .header {
+        color: #7279AC;
+        font-weight: 600;
+      }
+      .value {
+        color: #6ec3ff;
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .last-pod-winner {
+      margin-top: 20px;
+      .header {
+        color: #7279AC;
+        font-weight: 600;
+      }
+      .winner-info {
+        .label {
+          color: #A3AAE5;
+          font-weight: 600;
+          margin-top: 15px;
+        }
+        .value {
+          color: #E5E7F5;
+          margin-top: 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+    .disburse-button {
+      margin-top: 8px;
+    }
+  }
+
+  .button-wrapper {
+    .button-style {
+      border: #41CD7D 1px solid;
+      color: #41CD7D;
+      border-radius: 15px;
+      min-width: 100px;
     }
   }
 }

@@ -6,11 +6,9 @@ import Landing from './Landing';
 class LandingContainer extends Component {
   state = {
     isJoinDialogOpen: false,
+    isRedeemDialogOpen: false,
+    isDisburseDialogOpen: false,
   };
-
-  onJoinClick = () => {
-    this.setState({ isJoinDialogOpen: true });
-  }
 
   handleState = (state = {}) => {
     this.setState(state);
@@ -20,9 +18,10 @@ class LandingContainer extends Component {
     return (
       <MainTemplate>
         <Landing
-          isJoinDialogOpen={this.state.isJoinDialogOpen}
-          onJoinClick={this.onJoinClick}
           handleState={this.handleState}
+          isJoinDialogOpen={this.state.isJoinDialogOpen}
+          isRedeemDialogOpen={this.state.isRedeemDialogOpen}
+          isDisburseDialogOpen={this.state.isDisburseDialogOpen}
         />
       </MainTemplate>
     );
