@@ -5,8 +5,13 @@ import DaiIcon from '../../../assets/icons/dai.svg';
 
 import JoinDialog from './JoinDialog/JoinDialogContainer';
 import RedeemDialog from './RedeemDialog/RedeemDilogContainer';
+import CreateDialog from './CreateDialog/CreateDialogContainer';
+import DisburseDialog from './DisburseDilog/DisburseDialogContainer';
 
-const Landing = ({ isJoinDialogOpen, handleState, isRedeemDialogOpen }) => {
+const Landing = ({
+  isJoinDialogOpen, handleState, isRedeemDialogOpen,
+  isCreateDialogOpen, isDisburseDialogOpen, isAdmin,
+}) => {
   const podInfo = [
     {
       header: 'Total Contract Balances',
@@ -48,6 +53,14 @@ const Landing = ({ isJoinDialogOpen, handleState, isRedeemDialogOpen }) => {
       />
       <RedeemDialog
         openDialog={isRedeemDialogOpen}
+        handleState={handleState}
+      />
+      <CreateDialog
+        openDialog={isCreateDialogOpen}
+        handleState={handleState}
+      />
+      <DisburseDialog
+        openDialog={isDisburseDialogOpen}
         handleState={handleState}
       />
       <div className="pod">
@@ -109,21 +122,29 @@ const Landing = ({ isJoinDialogOpen, handleState, isRedeemDialogOpen }) => {
         </div>
       </div>
       <div className="right-content">
-        <div className="create-pod button-wrapper">
-          <h4 className="header">Create Pod</h4>
-          <Button
-            className="button-style create-button"
-            disableRipple
-            disableElevation
-            // onClick={() => onJoinClick()}
-          >
-            Create
-          </Button>
-        </div>
-        <div className="total-winning">
-          <h4 className="header">Your Total Winning</h4>
-          <h4 className="value">$400</h4>
-        </div>
+        {
+          isAdmin && (
+            <div className="create-pod button-wrapper">
+              <h4 className="header">Create Pod</h4>
+              <Button
+                className="button-style create-button"
+                disableRipple
+                disableElevation
+                onClick={() => handleState({ isCreateDialogOpen: true })}
+              >
+                Create
+              </Button>
+            </div>
+          )
+        }
+        {
+          !isAdmin && (
+            <div className="total-winning">
+              <h4 className="header">Your Total Winning</h4>
+              <h4 className="value">$400</h4>
+            </div>
+          )
+        }
         <div className="last-pod-winner">
           <h4 className="header">Last Pod Details</h4>
           <div className="winner-info">
@@ -135,16 +156,20 @@ const Landing = ({ isJoinDialogOpen, handleState, isRedeemDialogOpen }) => {
             <h6 className="value">0x55E73A69B2315A6e7192af118705079Eb1dB2184</h6>
           </div>
         </div>
-        <div className="disburse-button button-wrapper">
-          <Button
-            className="button-style"
-            disableRipple
-            disableElevation
-            onClick={() => handleState({ isDisburseDialogOpen: true })}
-          >
-            Disburse
-          </Button>
-        </div>
+        {
+          isAdmin && (
+            <div className="disburse-button button-wrapper">
+              <Button
+                className="button-style"
+                disableRipple
+                disableElevation
+                onClick={() => handleState({ isDisburseDialogOpen: true })}
+              >
+                Disburse
+              </Button>
+            </div>
+          )
+        }
       </div>
     </div>
   );

@@ -51,9 +51,10 @@ class MainTemplateContainer extends Component {
     return (
       <>
         <MainTemplate
-          children={children}
           metamaskAddress={metamaskAddress}
-        />
+        >
+          {children}
+        </MainTemplate>
         <NetworkTypeDialogContainer
           displayMessage={metamaskLoginMessage || displayMessage}
           openDialog={metamaskLoginMessage || displayMessage}
