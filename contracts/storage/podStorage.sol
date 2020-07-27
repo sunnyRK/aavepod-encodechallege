@@ -1,5 +1,3 @@
-pragma solidity ^0.6.0;
-
 contract podStorage {
     
     using SafeMath for uint256;
@@ -88,6 +86,10 @@ contract podStorage {
     function setTimestamp(uint256 betId, uint256 timestamp) public {
         // timeStamp[betId] = now + (timestamp*86400);
         timeStamp[betId] = now.add(timestamp.mul(86400));
+    }
+    
+    function getPodName(uint256 betId) public view returns(string memory) {
+        return betInfoMapping[betId].betName;
     }
     
     function getTimestamp(uint256 betId) public view returns(uint256) {
@@ -184,6 +186,4 @@ contract podStorage {
     function getRedeemFlagStakerOnBet(uint256 betId, address staker) public view returns(bool) {
         return isRedeem[betId][staker];
     }
-    
 }
-

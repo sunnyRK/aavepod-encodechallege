@@ -9,39 +9,41 @@ import CreateDialog from './CreateDialog/CreateDialogContainer';
 import DisburseDialog from './DisburseDilog/DisburseDialogContainer';
 
 const Landing = ({
-  isJoinDialogOpen, handleState, isRedeemDialogOpen,
-  isCreateDialogOpen, isDisburseDialogOpen, isAdmin,
+  isJoinDialogOpen, handleState, isRedeemDialogOpen, 
+  isCreateDialogOpen, isDisburseDialogOpen, isAdmin, podName, numOfStakers, interestGenerate, minimumContribution, 
+  yourInvestment, totalStakeOnBet, lastPodName, lastPrizeAmt, lastWinnerAddress,
+  days, hours, seconds, minutes
 }) => {
   const podInfo = [
     {
       header: 'Total Contract Balances',
-      value: '234',
+      value: totalStakeOnBet,
     },
     {
       header: 'Your Investment',
-      value: '0',
+      value: yourInvestment,
     },
     {
       header: 'Joining Amount',
-      value: '20',
+      value: parseInt(minimumContribution)/1e18,
     },
   ];
 
   const countdownInfo = [
     {
-      value: '2',
+      value: days,
       label: 'Days',
     },
     {
-      value: '12',
+      value: hours,
       label: 'Hours',
     },
     {
-      value: '36',
+      value: minutes,
       label: 'Minutes',
     },
     {
-      value: '57',
+      value: seconds,
       label: 'Seconds',
     },
   ];
@@ -64,11 +66,11 @@ const Landing = ({
         handleState={handleState}
       />
       <div className="pod">
-        <h3 className="pod-name">Pod Name</h3>
+      <h3 className="pod-name">{podName}</h3>
         <div className="join-pod">
           <div className="pod-progressbar">
             <ProgressBar now={60} />
-            <div className="total-investor">02/10</div>
+  <div className="total-investor">{numOfStakers}/10</div>
           </div>
           <div className="button-wrapper">
             <Button
@@ -95,7 +97,7 @@ const Landing = ({
               <div className="estimated-header">Estimated Prize</div>
               <h1 className="estimated-value">
                 <img src={DaiIcon} className="coin-icon" alt="coin" />
-                &nbsp;234.098789
+                &nbsp;{interestGenerate}
               </h1>
             </div>
           </div>
@@ -149,11 +151,11 @@ const Landing = ({
           <h4 className="header">Last Pod Details</h4>
           <div className="winner-info">
             <div className="label">Pod Name</div>
-            <h6 className="value">PodName</h6>
+            <h6 className="value">{lastPodName}</h6>
             <div className="label">Prize Amount</div>
-            <h6 className="value">$234</h6>
+            <h6 className="value">{lastPrizeAmt}</h6>
             <div className="label">Winner Address</div>
-            <h6 className="value">0x55E73A69B2315A6e7192af118705079Eb1dB2184</h6>
+            <h6 className="value">{lastWinnerAddress}</h6>
           </div>
         </div>
         {

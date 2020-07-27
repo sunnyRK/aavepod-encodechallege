@@ -7,14 +7,33 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import RedeemDialog from './ReedemDialog';
 
+import web3 from "../../../../../config/web3";
+import { 
+  getPodFactoryContract,
+  getAaavePodContract,
+  getERCContractInstance,
+  getPodStorageContract
+} from "../../../../../config/instances/contractinstances";
+
 class RedeemDialogContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  onConfirmClick = () => {
+  onConfirmClick = async () => {
     this.props.handleState({ isRedeemDialogOpen: false });
+    const accounts = await web3.eth.getAccounts();
+    const podContract = await getPodStorageContract(web3);
+    const runningPodbetId = await podContract.methods.getRunningPodBetId().call();    
+
+    const podFactoryContract = await getPodFactoryContract(web3);
+    const getPods = await podFactoryContract.methods.getPods().call();
+    const aavePodContract = await getAaavePodContract(web3, getPods[getPods.length-1]);
+
+    await aavePodContract.methods.redeemFromBetBeforeFinish(runningPodbetId).send({
+      from: accounts[0]
+    })
   }
 
   onCancelClick = () => {
