@@ -165,7 +165,7 @@ const Landing = ({
               <div className="label">Winner Address</div>
               <h6 className="value">{lastWinnerAddress}</h6>
               {
-                isAdmin && ( 
+                isAdmin ?
                   lastWinnerDeclare
                     ? <div className="disburse-button button-wrapper">
                     <Button
@@ -186,7 +186,26 @@ const Landing = ({
                       Disburse
                     </Button>
                   </div>
-                )
+                : lastWinnerDeclare
+                ? <div className="disburse-button button-wrapper">
+                <Button
+                  className="button-style"
+                  disableRipple
+                  disableElevation
+                >
+                  Prize already disbursed
+                </Button>
+                </div>
+                : <div className="disburse-button button-wrapper">
+                <Button
+                  className="button-style"
+                  disableRipple
+                  disableElevation
+                  onClick={() => handleState({ isDisburseDialogOpen: true })}
+                >
+                  Prize will be Disbursed soon
+                </Button>
+              </div>
               }                    
             </div>
           </div>

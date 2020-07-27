@@ -60,8 +60,8 @@ class LandingContainer extends Component {
 
       const numOfStakers = await podContract.methods.getNumOfStakers(runningPodbetId).call();
       const stakerCount = await podContract.methods.getStakeCount(runningPodbetId).call();
-      const totalWinning = await podContract.methods.getTotalWinning(accounts[0]).call();
-
+      let totalWinning = await podContract.methods.getTotalWinning(accounts[0]).call();
+      totalWinning = web3.utils.fromWei(totalWinning.toString(), "ether");
       // const betIdManager = await podContract.methods.getBetIdManager(runningPodbetId).call();
 
       const getPods = await podFactoryContract.methods.getPods().call();
@@ -92,6 +92,7 @@ class LandingContainer extends Component {
         let lastPrizeAmt;
         if(lastWinnerDeclare) {
           lastPrizeAmt = await podContract.methods.getInterest(betIds[betIds.length-2]).call();
+          lastPrizeAmt = web3.utils.fromWei(lastPrizeAmt.toString(), "ether");  //lastInterestGenerate 
         } else {  
           const lastBalanceWithInterest = await aavePodContract.methods.getBalanceofAaveToken(getPods[getPods.length-2]).call();
           let lastTotalStakeOnBet = await podContract.methods.getTotalStakeFromBet(betIds[betIds.length-2]).call();
