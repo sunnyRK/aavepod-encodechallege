@@ -18,6 +18,8 @@ class LandingContainer extends Component {
     isAdmin: false,
     podName: 'Pod Name',
     numOfStakers: '0',
+    stakerCount: '0',
+    progress: '0',
     interestGenerate: '0',
     minimumContribution: '0',
     yourInvestment: '0',
@@ -29,7 +31,6 @@ class LandingContainer extends Component {
     hours: '10',
     minutes: '29',
     seconds: '40'
-
   };
 
   handleState = (state = {}) => {
@@ -51,6 +52,8 @@ class LandingContainer extends Component {
       // const timeStamp = await podContract.methods.getTimestamp(runningPodbetId).call();
 
       const numOfStakers = await podContract.methods.getNumOfStakers(runningPodbetId).call();
+      const stakerCount = await podContract.methods.getStakeCount(runningPodbetId).call();
+
       // const betIdManager = await podContract.methods.getBetIdManager(runningPodbetId).call();
 
       const getPods = await podFactoryContract.methods.getPods().call();
@@ -95,7 +98,10 @@ class LandingContainer extends Component {
         });
       }
 
-      // // console.log(lastInterestGenerate);
+      const mul = stakerCount * 100;
+      const progress = mul/numOfStakers;
+
+      console.log(progress)
 
       this.setState({
         podName,
@@ -103,7 +109,9 @@ class LandingContainer extends Component {
         interestGenerate, 
         minimumContribution, 
         yourInvestment,
-        totalStakeOnBet
+        totalStakeOnBet,
+        stakerCount,
+        progress
       });
     } catch (error) {
       console.log(error);
@@ -133,6 +141,8 @@ class LandingContainer extends Component {
           isAdmin={this.state.isAdmin}
           podName={this.state.podName}
           numOfStakers={this.state.numOfStakers}
+          progress={this.state.progress}
+          stakerCount={this.state.stakerCount}
           interestGenerate={this.state.interestGenerate}
           minimumContribution={this.state.minimumContribution}
           yourInvestment={this.state.yourInvestment}

@@ -9,8 +9,8 @@ import CreateDialog from './CreateDialog/CreateDialogContainer';
 import DisburseDialog from './DisburseDilog/DisburseDialogContainer';
 
 const Landing = ({
-  isJoinDialogOpen, handleState, isRedeemDialogOpen, 
-  isCreateDialogOpen, isDisburseDialogOpen, isAdmin, podName, numOfStakers, interestGenerate, minimumContribution, 
+  isJoinDialogOpen, handleState, isRedeemDialogOpen, progress,
+  isCreateDialogOpen, isDisburseDialogOpen, isAdmin, podName, numOfStakers, stakerCount, interestGenerate, minimumContribution, 
   yourInvestment, totalStakeOnBet, lastPodName, lastPrizeAmt, lastWinnerAddress,
   days, hours, seconds, minutes
 }) => {
@@ -69,8 +69,8 @@ const Landing = ({
       <h3 className="pod-name">{podName}</h3>
         <div className="join-pod">
           <div className="pod-progressbar">
-            <ProgressBar now={60} />
-  <div className="total-investor">{numOfStakers}/10</div>
+            <ProgressBar now={progress} />
+  <div className="total-investor">{stakerCount}/{numOfStakers}</div>
           </div>
           <div className="button-wrapper">
             <Button
