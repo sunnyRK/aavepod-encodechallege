@@ -24,9 +24,10 @@ class LandingContainer extends Component {
     minimumContribution: '0',
     yourInvestment: '0',
     totalStakeOnBet: '0',
-    lastPodName: 'fake',
+    lastPodName: 'Last Pod name',
     lastPrizeAmt: '0',
-    lastWinnerAddress: '0x..',
+    lastWinnerAddress: '0x0000000000000',
+    totalWinning: '0',
     timeStamp: 0,
     days: '0',
     hours: '0',
@@ -54,8 +55,11 @@ class LandingContainer extends Component {
       const podName = await podContract.methods.getPodName(runningPodbetId).call();
       const timeStamp = await podContract.methods.getTimestamp(runningPodbetId).call();
 
+      console.log(timeStamp)
+
       const numOfStakers = await podContract.methods.getNumOfStakers(runningPodbetId).call();
       const stakerCount = await podContract.methods.getStakeCount(runningPodbetId).call();
+      const totalWinning = await podContract.methods.getTotalWinning(accounts[0]).call();
 
       // const betIdManager = await podContract.methods.getBetIdManager(runningPodbetId).call();
 
@@ -116,6 +120,7 @@ class LandingContainer extends Component {
         stakerCount,
         progress,
         timeStamp,
+        totalWinning
       }, () => {
         this.countDownTimer();
         setInterval(() => { this.generateInterest(); }, 10000);
@@ -141,15 +146,16 @@ class LandingContainer extends Component {
 
   countDownTimer = () => {
     const { timeStamp } = this.state;
+    console.log(timeStamp);
     const countDownDate = timeStamp || Date.now();
 
     // Update the count down every 1 second
     const x = setInterval(() => {
       // Get today's date and time
       const now = new Date().getTime();
-
+      console.log(now)
       // Find the distance between now and the count down date
-      const distance = countDownDate - now;
+      const distance = (countDownDate*1000) - now;
 
       // Time calculations for days, hours, minutes and seconds
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -205,6 +211,7 @@ class LandingContainer extends Component {
           yourInvestment={this.state.yourInvestment}
           totalStakeOnBet={this.state.totalStakeOnBet}
           // onCreatePod={this.onCreatePod}
+          totalWinning={this.state.totalWinning}
           days={this.state.days}
           hours={this.state.hours}
           minutes={this.state.minutes}

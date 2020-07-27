@@ -11,7 +11,7 @@ import CreateDialog from './CreateDialog/CreateDialogContainer';
 import DisburseDialog from './DisburseDilog/DisburseDialogContainer';
 
 const Landing = ({
-  isJoinDialogOpen, handleState, isRedeemDialogOpen, progress,
+  isJoinDialogOpen, handleState, isRedeemDialogOpen, progress, totalWinning,
   isCreateDialogOpen, isDisburseDialogOpen, isAdmin, podName, numOfStakers, stakerCount, interestGenerate, minimumContribution, 
   yourInvestment, totalStakeOnBet, lastPodName, lastPrizeAmt, lastWinnerAddress,
   days, hours, seconds, minutes, landingLoading,
@@ -151,7 +151,7 @@ const Landing = ({
             !isAdmin && (
               <div className="total-winning">
                 <h4 className="header">Your Total Winning</h4>
-                <h4 className="value">$400</h4>
+                <h4 className="value">{totalWinning}</h4>
               </div>
             )
           }
