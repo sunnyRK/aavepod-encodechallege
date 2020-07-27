@@ -11,7 +11,7 @@ import CreateDialog from './CreateDialog/CreateDialogContainer';
 import DisburseDialog from './DisburseDilog/DisburseDialogContainer';
 
 const Landing = ({
-  isJoinDialogOpen, handleState, isRedeemDialogOpen, progress, totalWinning,
+  isJoinDialogOpen, handleState, isRedeemDialogOpen, progress, totalWinning, lastWinnerDeclare,
   isCreateDialogOpen, isDisburseDialogOpen, isAdmin, podName, numOfStakers, stakerCount, interestGenerate, minimumContribution, 
   yourInvestment, totalStakeOnBet, lastPodName, lastPrizeAmt, lastWinnerAddress,
   days, hours, seconds, minutes, landingLoading,
@@ -164,22 +164,32 @@ const Landing = ({
               <h6 className="value">{lastPrizeAmt}</h6>
               <div className="label">Winner Address</div>
               <h6 className="value">{lastWinnerAddress}</h6>
+              {
+                isAdmin && ( 
+                  lastWinnerDeclare
+                    ? <div className="disburse-button button-wrapper">
+                    <Button
+                      className="button-style"
+                      disableRipple
+                      disableElevation
+                    >
+                      Prize already disbursed
+                    </Button>
+                    </div>
+                    : <div className="disburse-button button-wrapper">
+                    <Button
+                      className="button-style"
+                      disableRipple
+                      disableElevation
+                      onClick={() => handleState({ isDisburseDialogOpen: true })}
+                    >
+                      Disburse
+                    </Button>
+                  </div>
+                )
+              }                    
             </div>
           </div>
-          {
-            isAdmin && (
-              <div className="disburse-button button-wrapper">
-                <Button
-                  className="button-style"
-                  disableRipple
-                  disableElevation
-                  onClick={() => handleState({ isDisburseDialogOpen: true })}
-                >
-                  Disburse
-                </Button>
-              </div>
-            )
-          }
         </div>
       </div>
     </BlockUI>

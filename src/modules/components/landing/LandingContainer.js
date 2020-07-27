@@ -27,6 +27,7 @@ class LandingContainer extends Component {
     lastPodName: 'Last Pod name',
     lastPrizeAmt: '0',
     lastWinnerAddress: '0x0000000000000',
+    lastWinnerDeclare: false,
     totalWinning: '0',
     timeStamp: 0,
     days: '0',
@@ -87,9 +88,9 @@ class LandingContainer extends Component {
       if(getPods.length > 1) {
         const lastPodName = await podContract.methods.getPodName(betIds[betIds.length-2]).call();
         const lastWinnerAddress = await podContract.methods.getWinnerAddress(betIds[betIds.length-2]).call();
-        const isWinnerDeclare = await podContract.methods.getWinnerDeclare(betIds[betIds.length-2]).call();
+        const lastWinnerDeclare = await podContract.methods.getWinnerDeclare(betIds[betIds.length-2]).call();
         let lastPrizeAmt;
-        if(isWinnerDeclare) {
+        if(lastWinnerDeclare) {
           lastPrizeAmt = await podContract.methods.getInterest(betIds[betIds.length-2]).call();
         } else {  
           const lastBalanceWithInterest = await aavePodContract.methods.getBalanceofAaveToken(getPods[getPods.length-2]).call();
@@ -98,10 +99,13 @@ class LandingContainer extends Component {
           lastPrizeAmt = web3.utils.fromWei(lastInterest.toString(), "ether");  //lastInterestGenerate 
         }
 
+        lastWinnerDeclare
+
         this.setState({
           lastPodName,
           lastPrizeAmt,
-          lastWinnerAddress
+          lastWinnerAddress,
+          lastWinnerDeclare
         });
       }
 
@@ -211,6 +215,7 @@ class LandingContainer extends Component {
           yourInvestment={this.state.yourInvestment}
           totalStakeOnBet={this.state.totalStakeOnBet}
           // onCreatePod={this.onCreatePod}
+          lastWinnerDeclare={this.state.lastWinnerDeclare}
           totalWinning={this.state.totalWinning}
           days={this.state.days}
           hours={this.state.hours}
