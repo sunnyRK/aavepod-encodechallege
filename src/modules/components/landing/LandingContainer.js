@@ -10,7 +10,7 @@ import {
 } from "../../../../config/instances/contractinstances";
 
 class LandingContainer extends Component {
-  state = {
+  state = { // eslint-disable-line
     isJoinDialogOpen: false,
     isRedeemDialogOpen: false,
     isDisburseDialogOpen: false,
@@ -27,10 +27,11 @@ class LandingContainer extends Component {
     lastPodName: 'fake',
     lastPrizeAmt: '0',
     lastWinnerAddress: '0x..',
-    days: '5',
-    hours: '10',
-    minutes: '29',
-    seconds: '40'
+    timeStamp: 0,
+    days: '0',
+    hours: '0',
+    minutes: '0',
+    seconds: '0',
   };
 
   handleState = (state = {}) => {
@@ -39,7 +40,9 @@ class LandingContainer extends Component {
 
   async componentDidMount() {
     try {
-      
+      window.ethereum.on('accountsChanged', accounts => {
+        window.location.reload(true);
+      });
       const accounts = await web3.eth.getAccounts();
       if (accounts.length > 0 && accounts[0] === '0x48845392F5a7c6b360A733e0ABE2EdcC74f1F4d6') {
         this.handleState({ isAdmin: true });
@@ -49,7 +52,7 @@ class LandingContainer extends Component {
       const podContract = await getPodStorageContract(web3);
       const runningPodbetId = await podContract.methods.getRunningPodBetId().call();
       const podName = await podContract.methods.getPodName(runningPodbetId).call();
-      // const timeStamp = await podContract.methods.getTimestamp(runningPodbetId).call();
+      const timeStamp = await podContract.methods.getTimestamp(runningPodbetId).call();
 
       const numOfStakers = await podContract.methods.getNumOfStakers(runningPodbetId).call();
       const stakerCount = await podContract.methods.getStakeCount(runningPodbetId).call();
@@ -111,13 +114,67 @@ class LandingContainer extends Component {
         yourInvestment,
         totalStakeOnBet,
         stakerCount,
-        progress
+        progress,
+        timeStamp,
+      }, () => {
+        this.countDownTimer();
+        setInterval(() => { this.generateInterest(); }, 10000);
       });
     } catch (error) {
       console.log(error);
     }
   }
 
+  generateInterest = async () => {
+    const podFactoryContract = await getPodFactoryContract(web3);
+    const getPods = await podFactoryContract.methods.getPods().call();
+    const podContract = await getPodStorageContract(web3);
+    const aavePodContract = await getAaavePodContract(web3, getPods[getPods.length - 1]);
+    const runningPodbetId = await podContract.methods.getRunningPodBetId().call();
+    const balanceWithInterest = await aavePodContract.methods.getBalanceofAaveToken(getPods[getPods.length - 1]).call();
+    const totalStakeOnBet = await podContract.methods.getTotalStakeFromBet(runningPodbetId).call();
+
+    const interest = balanceWithInterest - totalStakeOnBet;
+    const interestGenerate = web3.utils.fromWei(interest.toString(), 'ether');
+    this.setState({ interestGenerate });
+  }
+
+  countDownTimer = () => {
+    const { timeStamp } = this.state;
+    const countDownDate = timeStamp || Date.now();
+
+    // Update the count down every 1 second
+    const x = setInterval(() => {
+      // Get today's date and time
+      const now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      const distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      this.setState({
+        days,
+        hours,
+        minutes,
+        seconds,
+      });
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        this.setState({
+          days: 'A',
+          hours: 'Winner',
+          minutes: 'is',
+          seconds: 'Declared',
+        });
+      }
+    }, 1000);
+  }
 
   // onCreatePod = async () => {
   //   try {
