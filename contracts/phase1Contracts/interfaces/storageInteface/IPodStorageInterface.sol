@@ -22,15 +22,11 @@ interface IPodStorageInterface {
     function increaseStakerCount(uint256 betId) external;
     function decreaseStakerCount(uint256 betId) external;
     function setTimestamp(uint256 betId, uint256 timestamp) external;
-    function setInterest(uint256 betId, uint256 interest) external;
     function setBetTokens(uint256 betId, address _tokenAddress, address _aaveToken) external;
-    function setWinningAmount(address winnerAddress, uint256 amount) external;
-
-    function getTotalWinning(address owner) external view returns(uint256);
+    
     function getPodName(uint256 betId) external view returns(string memory);
     function getRunningPodBetId() external view returns(uint256);
     function getTimestamp(uint256 betId) external view returns(uint256);
-    function getInterest(uint256 betId) external view returns(uint256);
     function getStakeCount(uint256 betId) external view returns(uint256);
     function getBetIdManager(uint256 betId) external view returns(address);
     function getLengthOfBetIds(address manager) external view returns(uint256);

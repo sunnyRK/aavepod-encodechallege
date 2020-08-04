@@ -1,5 +1,3 @@
-pragma solidity 0.6.6;
-
 contract podStorage {
     
     using SafeMath for uint256;
@@ -20,9 +18,7 @@ contract podStorage {
         address aaveToken;
     }
     
-    mapping(address => uint256) public totalWinning;
     mapping(uint256 => uint256) public timeStamp;
-    mapping(uint256 => uint256) public interestGenerated;
     mapping(uint256 => address) public betIdMapping; // address manger of bet id
     mapping(address => uint256[]) public betIdsOfManager;
     mapping(uint256 => betInfo) public betInfoMapping; // bet info in struct for bet id
@@ -89,23 +85,7 @@ contract podStorage {
     
     function setTimestamp(uint256 betId, uint256 timestamp) public {
         // timeStamp[betId] = now + (timestamp*86400);
-        timeStamp[betId] = now.add(timestamp.mul(60));
-    }
-    
-    function setWinningAmount(address winnerAddress, uint256 amount) public {
-        totalWinning[winnerAddress] = totalWinning[winnerAddress] + amount;
-    }
-    
-    function getTotalWinning(address owner) public view returns(uint256) {
-        return totalWinning[owner];
-    }
-    
-    function setInterest(uint256 betId, uint256 interest) public {
-        interestGenerated[betId] = interest;
-    }
-    
-    function getInterest(uint256 betId) public view returns(uint256) {
-        return interestGenerated[betId];
+        timeStamp[betId] = now.add(timestamp.mul(86400));
     }
     
     function getPodName(uint256 betId) public view returns(string memory) {
