@@ -1,18 +1,17 @@
-# Alarm-POD (Sponser Chainlink)
+# Alarm-POD (Sponser AAVE)
 
-## Alarm-POD developed during Unitize-SFBW Hackathon By Gitcoin Community.
+## Alarm-POD developed during Spark Hackathon By Encode Club.
 
 # Phase-1
 
-Alarm-POD is no-loss and crypto saving platform to win interest using trustless blockchain technology. Using chainlink alarm clock, chainlink VRF function and AAVE protocol
+Alarm-POD is no-loss and crypto saving platform to win interest using trustless blockchain technology. Using AAVE protocol, chainlink alarm clock and chainlink VRF function
 
 When Contract owner will create POD, it trigger the chainlink alarm clock to wait until to finish time-period.
 
-During this time period it accures interest on deposited crypto token which is deposited by participants(staker).
+During this time period it accures interest using AAVE Lending protocol on deposited crypto token which is deposited by participants(staker).
 And during this time period any one can see live interest generate on dashboard.
 
-Once Time-period complete the chainlink-alarm-clock
-recognize it. and then using callback function of chainlink-alarm-clock, it triggers the chainlink VRF function to get the winner among participant using randomness functionality of VRF.
+Once Time-period complete the chainlink-alarm-clock recognize it. and then using callback function of chainlink-alarm-clock, it triggers automatically the chainlink VRF function to get the winner among participant using randomness functionality of VRF. So It is totally automated and trustless system to accure interest and choose winner.
 
 once Chainlink VRF decide the winner, admin needs to disburse all the original tokens to all users and "original token + interest" to winner
 
@@ -77,7 +76,6 @@ In Summarize, It is `AaveBalancerAggregator`. We are making platform where parti
 This feature is `not fully implemented` with UI. We have implemented demo(not fully) smart contract for aave and balancer for this usecase.  
 
 `note: Phase-2 is not fully implemented.`
-
 
 ## Tech stack
 
