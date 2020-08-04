@@ -49,10 +49,15 @@ class CreateDialogContainer extends Component {
     } else {
       isWinnerDeclareofLast = await podContract.methods.getWinnerDeclare(betIds[betIds.length-2]).call();
       winnerAddress = await podContract.methods.getWinnerAddress(betIds[betIds.length-1]).call();
+      console.log("id: ",betIds[betIds.length-1])
+      console.log("id2: ", betIds[betIds.length-2])
       if(winnerAddress != "0x0000000000000000000000000000000000000000") {
         isWinnerDeclareofCurrent = true;
       }
     }
+
+    console.log(isWinnerDeclareofLast)
+    console.log(isWinnerDeclareofCurrent)
 
     if(isWinnerDeclareofLast && isWinnerDeclareofCurrent) {
       const podFactoryContract = await getPodFactoryContract(web3);

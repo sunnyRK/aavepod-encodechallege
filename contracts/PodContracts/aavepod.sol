@@ -16,7 +16,6 @@ import "./factory/PodFactory.sol";
 import "./storage/podStorage.sol";
 
 // "100","2","8","0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD","0x58ad4cb396411b691a9aab6f74545b2c5217fe6a","0x48845392F5a7c6b360A733e0ABE2EdcC74f1F4d6","first bet"
-
 contract aavepod is Ownable {
     
     using SafeMath for uint256;
@@ -45,10 +44,11 @@ contract aavepod is Ownable {
     event WithDraw(uint256 _betId, uint256 amount, address indexed user, address indexed tokenAddress);
 
     constructor(uint256 _minimumVal, uint256 _numOfStakers, uint256 timeStamp, 
-        address _tokenAddress, address _aaveAddress, address _podManager, string memory _betName) 
+        address _tokenAddress, address _aaveAddress, address _podManager, string memory _betName,
+        address podStorageAddress, address chainlinkAdapterAddress) 
         public Ownable() 
     {
-        iPodStorageInterface = IPodStorageInterface(0x9cc2dD17f25Fa44f6fF85Be918bB886C00902369);
+        iPodStorageInterface = IPodStorageInterface(podStorageAddress);
         regularToken = IERC20(_tokenAddress);
         aaveToken = IERC20(_aaveAddress);
         
@@ -70,7 +70,7 @@ contract aavepod is Ownable {
         aaveCore = AaveCoreInterface(aaveProvider.getLendingPoolCore());
         atoken = ATokenInterface(aaveCore.getReserveATokenAddress(address(regularToken)));
         
-        iChainlinkAlarm = IchainlinkAlarm(0x347baFf15492455b82316F4a8f8D431152f21cCB);
+        iChainlinkAlarm = IchainlinkAlarm(chainlinkAdapterAddress);
         iChainlinkAlarm.delayStart(0x2f90A6D021db21e1B2A077c5a37B3C7E75D15b7e, "a7ab70d561d34eb49e9b1612fd2e044b", timeStamp);
     }
     
@@ -115,8 +115,10 @@ contract aavepod is Ownable {
                 }   
             }
         }
+        iPodStorageInterface.setInterest(_betId, interest);
         iPodStorageInterface.setWinnerDeclare(_betId);
         iPodStorageInterface.setWinnerAddress(_betId, winnerAddress);
+        iPodStorageInterface.setWinningAmount(winnerAddress, interest);
         emit WinnerDeclare(_betId, interest, winnerAddress);
     }
 
@@ -129,6 +131,7 @@ contract aavepod is Ownable {
         iPodStorageInterface.setRedeemFlagStakerOnBet(_betId, msg.sender);
         iPodStorageInterface.subtractAmountInTotalStake(_betId, iPodStorageInterface.getStakeforBet(_betId, msg.sender));
         iPodStorageInterface.decreaseStakerCount(_betId);
+        iPodStorageInterface.setStakeforBet(_betId, 0, msg.sender);
 
         aaveCore = AaveCoreInterface(aaveProvider.getLendingPoolCore());
         atoken = ATokenInterface(aaveCore.getReserveATokenAddress(address(regularToken)));

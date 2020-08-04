@@ -56,7 +56,8 @@ class LandingContainer extends Component {
       const podName = await podContract.methods.getPodName(runningPodbetId).call();
       const timeStamp = await podContract.methods.getTimestamp(runningPodbetId).call();
 
-      console.log(timeStamp)
+      console.log(runningPodbetId)
+      console.log("time: ",timeStamp)
 
       const numOfStakers = await podContract.methods.getNumOfStakers(runningPodbetId).call();
       const stakerCount = await podContract.methods.getStakeCount(runningPodbetId).call();
@@ -67,7 +68,7 @@ class LandingContainer extends Component {
       const getPods = await podFactoryContract.methods.getPods().call();
       const aavePodContract = await getAaavePodContract(web3, getPods[getPods.length-1]);
 
-      console.log(getPods[getPods.length-1]);
+      // console.log(getPods[getPods.length-1]);
       const balanceWithInterest = await aavePodContract.methods.getBalanceofAaveToken(getPods[getPods.length-1]).call();
       let totalStakeOnBet = await podContract.methods.getTotalStakeFromBet(runningPodbetId).call();
 
@@ -151,14 +152,17 @@ class LandingContainer extends Component {
 
   countDownTimer = () => {
     const { timeStamp } = this.state;
-    console.log(timeStamp);
+    console.log("Timestap: ",timeStamp);
     const countDownDate = timeStamp || Date.now();
+    // const countDownDate = Date.now();
 
     // Update the count down every 1 second
     const x = setInterval(() => {
+      
       // Get today's date and time
       const now = new Date().getTime();
-      console.log(now)
+      console.log("now: ",now)
+
       // Find the distance between now and the count down date
       const distance = (countDownDate*1000) - now;
 

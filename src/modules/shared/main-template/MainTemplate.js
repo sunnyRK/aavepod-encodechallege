@@ -7,7 +7,7 @@ import {
 const MainTemplate = ({ children, metamaskAddress }) => (
   <div className="main-template">
     <div className="main-header">
-      <div className="app-name">AavePod</div>
+      <div className="app-name">Alarm-POD</div>
       <div className="metamask-address">{metamaskAddress}</div>
     </div>
     <div className="main-content">
@@ -35,10 +35,10 @@ const MainTemplate = ({ children, metamaskAddress }) => (
 
               <Grid.Column width={5}>
                 <Header as="h4" inverted>
-                  Developed During Spark Hackathon
+                  Developed During Spark-Encode Club Hackathon
                 </Header>
                 <p>
-                  Aave protocol used
+                  Aave and Chainlink protocol 
                 </p>
               </Grid.Column>
             </Grid.Row>
