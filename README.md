@@ -1,8 +1,8 @@
 # Alarm-POD (Sponser AAVE)
 
-## Alarm-POD developed during Spark Hackathon By Encode Club.
+# Alarm-POD developed during Spark Hackathon By Encode Club.
 
-# Phase-1 (Fully Implemented)
+## Phase-1 (Fully Implemented)
 
 Alarm-POD is no-loss and crypto saving platform to win interest using trustless blockchain technology. Using AAVE protocol, chainlink alarm clock and chainlink VRF function.
 
@@ -19,7 +19,7 @@ once Chainlink VRF decide the winner, platform disburse all the original tokens 
 
 Let's see demo below for Phase-1....
 
-# Video Demo
+## Video Demo
 
 https://www.youtube.com/watch?v=IurN0H7ef-8  
 [![AAVE+Chainlink](Screenshots/aavechainlink.png)](https://www.youtube.com/watch?v=IurN0H7ef-8 "Alarm-POD")
@@ -64,7 +64,7 @@ https://www.youtube.com/watch?v=IurN0H7ef-8
 ## Current Future Task in mind
 1. Use ENS(Ethreum name service) to give more flexibilty to user.
 
-# Phase-2 (AaveBalancerAggregator) 
+## Phase-2 (AaveBalancerAggregator) 
 
 `Note: Phase-2 is not fully implemented.`
 
