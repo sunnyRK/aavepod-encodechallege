@@ -15,10 +15,50 @@ import {
   getPodStorageContract
 } from "../../../../../config/instances/contractinstances";
 
+import DaiIcon from '../../../../assets/icons/dai.svg';
+import BatIcon from '../../../../assets/icons/bat.svg';
+
 class JoinDialogContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      minimumContribution: '',
+      options: []
+    };
+  }
+
+  async componentDidMount() {
+    const podContract = await getPodStorageContract(web3);
+    const runningPodbetId = await podContract.methods.getRunningPodBetId().call();    
+    const minimumContribution = await podContract.methods.getMinimumContribution(runningPodbetId).call();
+
+    const options = [
+      {
+        key: 'DAI',
+        text: (
+          <div className="token-price-pair">
+            <img src={DaiIcon} className="ui avatar image" alt="coin" />
+        &nbsp;{web3.utils.fromWei(minimumContribution.toString(), "ether")}$
+          </div>
+        ),
+        value: 'DAI',
+      },
+      {
+        key: 'BAT',
+        text: (
+          <div className="token-price-pair">
+            <img src={BatIcon} className="ui avatar image" alt="coin" />
+            &nbsp;{web3.utils.fromWei(minimumContribution.toString(), "ether")}$
+          </div>
+        ),
+        value: 'BAT',
+      },
+    ];
+    
+    this.setState({
+      minimumContribution,
+      options
+    })
   }
 
   onJoinClick = async () => {
@@ -62,7 +102,12 @@ class JoinDialogContainer extends Component {
           </IconButton>
         </DialogTitle>
         <DialogContent className="dialog-content join-dialog">
-          <JoinDialog onJoinClick={this.onJoinClick} />
+          <JoinDialog 
+            onJoinClick={this.onJoinClick}
+            minimumContribution={this.state.minimumContribution} 
+            options={this.state.options}
+          />
+
         </DialogContent>
       </Dialog>
     );

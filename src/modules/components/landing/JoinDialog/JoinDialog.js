@@ -8,30 +8,30 @@ import { Button } from '@material-ui/core';
 import DaiIcon from '../../../../assets/icons/dai.svg';
 import BatIcon from '../../../../assets/icons/bat.svg';
 
-const options = [
-  {
-    key: 'DAI',
-    text: (
-      <div className="token-price-pair">
-        <img src={DaiIcon} className="ui avatar image" alt="coin" />
-        &nbsp;20$
-      </div>
-    ),
-    value: 'DAI',
-  },
-  {
-    key: 'BAT',
-    text: (
-      <div className="token-price-pair">
-        <img src={BatIcon} className="ui avatar image" alt="coin" />
-        &nbsp;20$
-      </div>
-    ),
-    value: 'BAT',
-  },
-];
+// const options = [
+//   {
+//     key: 'DAI',
+//     text: (
+//       <div className="token-price-pair">
+//         <img src={DaiIcon} className="ui avatar image" alt="coin" />
+//     &nbsp;{minimumContribution}$
+//       </div>
+//     ),
+//     value: 'DAI',
+//   },
+//   {
+//     key: 'BAT',
+//     text: (
+//       <div className="token-price-pair">
+//         <img src={BatIcon} className="ui avatar image" alt="coin" />
+//         &nbsp;{minimumContribution}$
+//       </div>
+//     ),
+//     value: 'BAT',
+//   },
+// ];
 
-const JoinDialog = ({ onJoinClick }) => (
+const JoinDialog = ({ onJoinClick, minimumContribution, options }) => (
   <div className="join-dialog-content">
     <FormControl fullWidth variant="outlined" classes={{ root: 'token-price-dropdown' }}>
       <InputLabel>Choose Your Token</InputLabel>

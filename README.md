@@ -21,8 +21,8 @@ Let's see demo below for Phase-1....
 
 ## Video Demo
 
-https://www.youtube.com/watch?v=IurN0H7ef-8  
-[![AAVE+Chainlink](Screenshots/aavechainlink.png)](https://www.youtube.com/watch?v=IurN0H7ef-8 "Alarm-POD")
+https://youtu.be/LKC2qWUtutI  
+[![AAVE+Chainlink](Screenshots/aavechainlink.png)](https://youtu.be/LKC2qWUtutI "Alarm-POD")
 ## How to run
 
 1. Clone repo `https://github.com/sunnyRK/aavepod-encodechallege.git`
